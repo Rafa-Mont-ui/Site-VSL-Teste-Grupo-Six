@@ -308,11 +308,11 @@ export default function CheckoutPage() {
           <div 
             ref={contentAnimation.elementRef}
             style={contentAnimation.animationStyles}
-            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-emerald-100"
+            className="bg-white rounded-3xl shadow-2xl p-4 sm:p-6 md:p-12 border border-emerald-100"
           >
             {/* Resumo do Pedido */}
             {selectedPlano ? (
-              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-8 mb-8 border border-emerald-200">
+              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-4 sm:p-6 md:p-8 mb-8 border border-emerald-200">
                 <h2 className="text-2xl font-bold text-emerald-800 mb-6 flex items-center justify-center gap-3">
                   <span className="text-3xl">📋</span>
                   Resumo do Pedido
@@ -351,10 +351,10 @@ export default function CheckoutPage() {
             <div 
               ref={formAnimation.elementRef}
               style={formAnimation.animationStyles}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
               {/* Informações Pessoais */}
-              <div className="bg-gray-50 rounded-2xl p-6">
+              <div className="bg-gray-50 rounded-2xl p-4 sm:p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                   <span className="text-2xl">👤</span>
                   Informações Pessoais
@@ -388,15 +388,15 @@ export default function CheckoutPage() {
               </div>
 
               {/* Método de Pagamento */}
-              <div className="bg-gray-50 rounded-2xl p-6">
+              <div className="bg-gray-50 rounded-2xl p-4 sm:p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                   <span className="text-2xl">💳</span>
                   Forma de Pagamento
                 </h3>
-                <div className="flex gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6">
                   <button 
                     onClick={() => setPaymentMethod('pix')} 
-                    className={`px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-200 ${
+                    className={`px-4 sm:px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-200 text-sm sm:text-base ${
                       paymentMethod === 'pix' 
                         ? 'border-emerald-600 bg-emerald-50 text-emerald-700 shadow-lg' 
                         : 'border-gray-300 hover:border-emerald-400 hover:bg-emerald-50'
@@ -406,7 +406,7 @@ export default function CheckoutPage() {
                   </button>
                   <button 
                     onClick={() => setPaymentMethod('boleto')} 
-                    className={`px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-200 ${
+                    className={`px-4 sm:px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-200 text-sm sm:text-base ${
                       paymentMethod === 'boleto' 
                         ? 'border-emerald-600 bg-emerald-50 text-emerald-700 shadow-lg' 
                         : 'border-gray-300 hover:border-emerald-400 hover:bg-emerald-50'
@@ -416,7 +416,7 @@ export default function CheckoutPage() {
                   </button>
                   <button 
                     onClick={() => setPaymentMethod('card')} 
-                    className={`px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-200 ${
+                    className={`px-4 sm:px-6 py-3 rounded-2xl border-2 font-semibold transition-all duration-200 text-sm sm:text-base ${
                       paymentMethod === 'card' 
                         ? 'border-emerald-600 bg-emerald-50 text-emerald-700 shadow-lg' 
                         : 'border-gray-300 hover:border-emerald-400 hover:bg-emerald-50'
@@ -434,7 +434,7 @@ export default function CheckoutPage() {
                       placeholder="Número do Cartão" 
                       className="w-full px-4 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 text-lg" 
                     />
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <input 
                         value={cardName} 
                         onChange={(e) => setCardName(e.target.value)} 
@@ -452,7 +452,7 @@ export default function CheckoutPage() {
                       value={cardCvv} 
                       onChange={(e) => setCardCvv(e.target.value)} 
                       placeholder="CVV" 
-                      className="w-32 px-4 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 text-lg" 
+                      className="w-full sm:w-32 px-4 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 text-lg" 
                     />
 
                     {/* Optional Stripe Elements UI — only appears if frontend Stripe packages are installed and NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is set */}
@@ -484,12 +484,12 @@ export default function CheckoutPage() {
               </div>
 
               {/* Endereço de Entrega */}
-              <div className="bg-gray-50 rounded-2xl p-6">
+              <div className="bg-gray-50 rounded-2xl p-4 sm:p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                   <span className="text-2xl">📍</span>
                   Endereço de Entrega
                 </h3>
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-3">CEP</label>
                     <input 
@@ -544,7 +544,7 @@ export default function CheckoutPage() {
                     className="w-full px-4 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 text-lg" 
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-3">Cidade</label>
                     <input 
