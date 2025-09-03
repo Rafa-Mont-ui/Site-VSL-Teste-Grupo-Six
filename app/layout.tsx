@@ -4,6 +4,7 @@ import { Inter, Poppins } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import GoogleAnalytics from "@/components/GoogleAnalytics"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -68,6 +69,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   )
