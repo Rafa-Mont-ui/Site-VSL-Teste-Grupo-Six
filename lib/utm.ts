@@ -26,6 +26,8 @@ export function readUTMsFromQuery(search: string): UTM {
 
 /** Persiste UTMs no localStorage se existirem */
 export function persistUTMs(utms: UTM) {
+  if (typeof window === 'undefined') return
+  
   const current = getPersistedUTMs()
   const merged = { ...current, ...utms }
   localStorage.setItem("UTM_DATA", JSON.stringify(merged))
@@ -33,6 +35,8 @@ export function persistUTMs(utms: UTM) {
 
 /** Recupera UTMs persistidas */
 export function getPersistedUTMs(): UTM {
+  if (typeof window === 'undefined') return {}
+  
   try {
     const raw = localStorage.getItem("UTM_DATA")
     return raw ? (JSON.parse(raw) as UTM) : {}
@@ -43,6 +47,11 @@ export function getPersistedUTMs(): UTM {
 
 /** Adiciona UTMs a uma URL mantendo parâmetros existentes */
 export function appendUTMsToUrl(url: string, extra?: Record<string, string>): string {
+  // Verificar se estamos no cliente antes de acessar window
+  if (typeof window === 'undefined') {
+    return url
+  }
+
   const u = new URL(url, window.location.origin)
   const stored = getPersistedUTMs()
   const params = new URLSearchParams(u.search)
@@ -65,6 +74,8 @@ export function appendUTMsToUrl(url: string, extra?: Record<string, string>): st
 
 /** Captura da URL atual e persiste */
 export function captureAndPersistUTMs(search: string) {
+  if (typeof window === 'undefined') return
+  
   const utms = readUTMsFromQuery(search)
   if (Object.keys(utms).length > 0) {
     persistUTMs(utms)

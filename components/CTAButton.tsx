@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
 import { appendUTMsToUrl } from "@/lib/utm"
 
@@ -13,7 +13,14 @@ interface CTAButtonProps {
 }
 
 export default function CTAButton({ href, children, text, variant = "primary", size = "md" }: CTAButtonProps) {
-  const finalUrl = appendUTMsToUrl(href)
+  const [finalUrl, setFinalUrl] = React.useState(href)
+
+  React.useEffect(() => {
+    // Só executar no cliente
+    if (typeof window !== 'undefined') {
+      setFinalUrl(appendUTMsToUrl(href))
+    }
+  }, [href])
 
   const baseClasses =
     "w-full inline-flex justify-center items-center px-6 py-4 font-bold text-center transition-all duration-300 active:scale-95 focus:outline-none focus:ring-4 hover:scale-105 transform-gpu"
