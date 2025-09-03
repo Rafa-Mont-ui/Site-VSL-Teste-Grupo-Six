@@ -1,5 +1,8 @@
 "use client"
 
+// Forçar renderização no cliente para evitar problemas de SSR
+export const dynamic = 'force-dynamic'
+
 import Header from "../components/Header"
 import VideoPlayer from "../components/VideoPlayer"
 import ProductCard from "../components/ProductCard"
@@ -28,24 +31,27 @@ export default function HomePage() {
 
   // Efeito para rolagem automática baseada em parâmetros da URL
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const scrollTo = urlParams.get('scroll')
-    
-    if (scrollTo) {
-      // Aguardar um pouco para as animações carregarem
-      setTimeout(() => {
-        const targetSection = document.getElementById(scrollTo)
-        if (targetSection) {
-          targetSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          })
-          
-          // Limpar o parâmetro da URL após a rolagem
-          const newUrl = window.location.pathname
-          window.history.replaceState({}, '', newUrl)
-        }
-      }, 1000) // Delay para permitir que as animações carreguem
+    // Verificar se estamos no cliente antes de acessar window
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const scrollTo = urlParams.get('scroll')
+      
+      if (scrollTo) {
+        // Aguardar um pouco para as animações carregarem
+        setTimeout(() => {
+          const targetSection = document.getElementById(scrollTo)
+          if (targetSection) {
+            targetSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            })
+            
+            // Limpar o parâmetro da URL após a rolagem
+            const newUrl = window.location.pathname
+            window.history.replaceState({}, '', newUrl)
+          }
+        }, 1000) // Delay para permitir que as animações carreguem
+      }
     }
   }, [])
 
@@ -102,14 +108,13 @@ export default function HomePage() {
         >
           <div className="container max-w-6xl mx-auto px-4 md:px-6 text-center relative z-10">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-balance bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-800 bg-clip-text text-transparent leading-tight">
-              Transforme Sua Vida com o{" "}
-              <span className="text-gradient">Protocolo VitaSlim</span>
+              Perca 15kg em 90 Dias{" "}
+              <span className="text-gradient">Naturalmente</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto text-pretty">
-              Descubra o método revolucionário que já transformou mais de{" "}
-              <span className="font-bold text-emerald-600">50.000 vidas</span> e{" "}
-              <span className="font-bold text-emerald-600"></span>{" "}
-              em apenas 90 dias
+              Descubra o método científico que já transformou mais de{" "}
+              <span className="font-bold text-emerald-600">50.000 vidas</span>{" "}
+              usando apenas ingredientes naturais
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
@@ -165,10 +170,10 @@ export default function HomePage() {
         {/* Products Section */}
         <section id="produtos" className="py-16 bg-white">
           <div className="container max-w-7xl mx-auto px-4 md:px-6">
-            <div ref={productsTitleAnimation.elementRef} style={productsTitleAnimation.animationStyles} className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">💎 Planos Disponíveis</h2>
-              <p className="text-lg text-muted-foreground">Escolha o que melhor se adapta às suas necessidades</p>
-            </div>
+                         <div ref={productsTitleAnimation.elementRef} style={productsTitleAnimation.animationStyles} className="text-center mb-16">
+               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">💎 Produtos Disponíveis</h2>
+               <p className="text-lg text-muted-foreground">Escolha o que melhor se adapta às suas necessidades</p>
+             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div
@@ -290,12 +295,12 @@ export default function HomePage() {
           className="py-20 bg-gradient-to-r from-emerald-600 to-teal-600"
         >
           <div className="container max-w-4xl mx-auto px-4 md:px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              🚀 Comece Sua Transformação Hoje!
-            </h2>
-            <p className="text-xl text-emerald-100 mb-8">
-              Junte-se aos milhares de pessoas que já transformaram suas vidas com o Protocolo VitaSlim
-            </p>
+                         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+               🚀 Comece Sua Transformação Hoje!
+             </h2>
+             <p className="text-xl text-emerald-100 mb-8">
+               Junte-se aos milhares de pessoas que já transformaram suas vidas com o método VitaSlim
+             </p>
             <CTAButton 
               text="Quero Começar Agora"
               href="/checkout"

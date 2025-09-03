@@ -17,7 +17,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files
-
+DATABASE_URL=postgresql://postgres:[AdvsN64rQo2Qv05i]@db.hxzxizvdufxqfakyfrhv.supabase.co:5432/postgres
 
 # vercel
 .vercel
