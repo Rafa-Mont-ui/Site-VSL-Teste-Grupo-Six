@@ -20,7 +20,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "VitaSlim - Perca 15kg em 90 dias naturalmente",
+  title: "VitaSlim",
   description:
     "Descubra o método científico que já transformou mais de 50.000 vidas usando apenas ingredientes naturais. Sem dietas malucas ou exercícios extremos.",
   keywords: "emagrecimento, perda de peso, nutracêuticos, suplementos naturais, dieta, saúde",
@@ -28,6 +28,13 @@ export const metadata: Metadata = {
   creator: "VitaSlim",
   publisher: "VitaSlim",
   robots: "index, follow",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "VitaSlim - Perca 15kg em 90 dias naturalmente",
     description: "Método científico comprovado para emagrecimento saudável e duradouro",
@@ -64,7 +71,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
-        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="font-sans antialiased">
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
