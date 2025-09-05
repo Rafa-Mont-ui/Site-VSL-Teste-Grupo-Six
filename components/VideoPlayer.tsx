@@ -15,7 +15,6 @@ export default function VideoPlayer({ videoId, onPlayChange, onMuteChange, autop
   const [isPlaying, setIsPlaying] = useState(autoplay)
   const [isMuted, setIsMuted] = useState(true)
 
-  // Função para iniciar o vídeo automaticamente
   const startAutoplay = () => {
     if (autoplay && iframeRef.current) {
       const currentSrc = iframeRef.current.src
@@ -26,10 +25,8 @@ export default function VideoPlayer({ videoId, onPlayChange, onMuteChange, autop
     }
   }
 
-  // Efeito para autoplay quando o componente montar
   useEffect(() => {
     if (autoplay) {
-      // Pequeno delay para garantir que o iframe carregou
       const timer = setTimeout(startAutoplay, 500)
       return () => clearTimeout(timer)
     }

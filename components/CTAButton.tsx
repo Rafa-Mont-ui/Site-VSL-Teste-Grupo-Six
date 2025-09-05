@@ -16,7 +16,6 @@ export default function CTAButton({ href, children, text, variant = "primary", s
   const [finalUrl, setFinalUrl] = React.useState(href)
 
   React.useEffect(() => {
-    // Só executar no cliente
     if (typeof window !== 'undefined') {
       setFinalUrl(appendUTMsToUrl(href))
     }
@@ -37,7 +36,6 @@ export default function CTAButton({ href, children, text, variant = "primary", s
       href={finalUrl}
       className={`${baseClasses} ${variantClasses}`}
       onClick={(e) => {
-        // Aqui você pode adicionar tracking de eventos
         console.log("CTA clicked:", finalUrl)
       }}
     >

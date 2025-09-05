@@ -1,6 +1,5 @@
 "use client"
 
-// Forçar renderização no cliente para evitar problemas de SSR
 export const dynamic = 'force-dynamic'
 
 import Header from "../components/Header"
@@ -16,7 +15,6 @@ import { useEffect } from "react"
 export default function HomePage() {
   const router = useRouter()
 
-  // Hooks de animação para cada seção
   const heroAnimation = useFadeInUp({ delay: 200, duration: 1000 })
   const videoAnimation = useFadeIn({ delay: 400, duration: 800 })
   const productsTitleAnimation = useFadeInUp({ delay: 200, duration: 700 })
@@ -29,15 +27,12 @@ export default function HomePage() {
   const testimonial3Animation = useFadeInRight({ delay: 500, duration: 700 })
   const ctaAnimation = useScaleIn({ delay: 200, duration: 800 })
 
-  // Efeito para rolagem automática baseada em parâmetros da URL
   useEffect(() => {
-    // Verificar se estamos no cliente antes de acessar window
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search)
       const scrollTo = urlParams.get('scroll')
       
       if (scrollTo) {
-        // Aguardar um pouco para as animações carregarem
         setTimeout(() => {
           const targetSection = document.getElementById(scrollTo)
           if (targetSection) {
@@ -46,16 +41,14 @@ export default function HomePage() {
               block: 'start'
             })
             
-            // Limpar o parâmetro da URL após a rolagem
             const newUrl = window.location.pathname
             window.history.replaceState({}, '', newUrl)
           }
-        }, 1000) // Delay para permitir que as animações carreguem
+        }, 1000)
       }
     }
   }, [])
 
-  // Handlers para navegação (navegar para páginas existentes)
   const handleVideoClick = () => {
     const videoSection = document.getElementById('video')
     if (videoSection) {
@@ -64,18 +57,15 @@ export default function HomePage() {
         block: 'start'
       })
       
-      // Aguardar a rolagem terminar e então iniciar o vídeo
       setTimeout(() => {
-        // Encontrar o botão de play e clicar nele para iniciar o vídeo
         const playButton = document.querySelector('button[aria-pressed="false"]') as HTMLButtonElement
         if (playButton) {
           playButton.click()
         }
-      }, 1500) // Delay para permitir que a rolagem termine
+      }, 1500)
     }
   }
   
-  // Handlers para rolagem suave para seções
   const handleProductsClick = () => {
     const productsSection = document.getElementById('produtos')
     if (productsSection) {
@@ -100,7 +90,6 @@ export default function HomePage() {
     <>
       <Header />
       <main>
-        {/* Hero Section */}
         <section 
           ref={heroAnimation.elementRef}
           style={heroAnimation.animationStyles}
@@ -138,13 +127,11 @@ export default function HomePage() {
             </div>
           </div>
           
-          {/* Elementos decorativos animados */}
           <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-200 rounded-full opacity-20 animate-pulse"></div>
           <div className="absolute top-40 right-20 w-16 h-16 bg-teal-200 rounded-full opacity-30 animate-pulse delay-1000"></div>
           <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-emerald-300 rounded-full opacity-25 animate-pulse delay-2000"></div>
         </section>
 
-        {/* Video Section */}
         <section 
           ref={videoAnimation.elementRef}
           style={videoAnimation.animationStyles}
@@ -167,7 +154,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Products Section */}
         <section id="produtos" className="py-16 bg-white">
           <div className="container max-w-7xl mx-auto px-4 md:px-6">
                          <div ref={productsTitleAnimation.elementRef} style={productsTitleAnimation.animationStyles} className="text-center mb-16">
@@ -241,7 +227,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
         <section 
           id="depoimentos"
           ref={testimonialsTitleAnimation.elementRef}
@@ -288,7 +273,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section 
           ref={ctaAnimation.elementRef}
           style={ctaAnimation.animationStyles}

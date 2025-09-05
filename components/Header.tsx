@@ -7,7 +7,6 @@ export default function Header() {
 
   const handleNavigation = (section: string) => {
     if (pathname === "/") {
-      // Se já estiver na página principal, rolar para a seção
       const targetSection = document.getElementById(section)
       if (targetSection) {
         targetSection.scrollIntoView({ 
@@ -16,7 +15,6 @@ export default function Header() {
         })
       }
     } else {
-      // Se estiver em outra página, redirecionar para a principal com rolagem
       router.push(`/?scroll=${section}`)
     }
   }
